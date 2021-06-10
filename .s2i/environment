@@ -1,2 +1,2 @@
 
-JAVA_MAIN_CLASS=com.azure.cosmosdb.cassandra.examples.UserProfile
+JAVA_MAIN_CLASS=com.example.Application
