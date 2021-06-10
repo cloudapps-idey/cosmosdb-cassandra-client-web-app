@@ -30,7 +30,7 @@ public class CassandraUtils {
 	private static final Logger logger = LogManager.getLogger(CassandraUtils.class);
 
 	private Cluster cluster;
-    private Configurations config = new Configurations();
+    //private Configurations config = new Configurations();
     private String cassandraHost = "127.0.0.1";
     private int cassandraPort = 10350;
     private String cassandraUsername = "localhost";
@@ -102,23 +102,32 @@ public class CassandraUtils {
      */
     private void loadCassandraConnectionDetails() throws Exception {
 		
-		  cassandraHost = config.getProperty("cassandra_host"); 
-		  cassandraPort = Integer.parseInt(config.getProperty("cassandra_port")); cassandraUsername =
-		  config.getProperty("cassandra_username"); 
-		  cassandraPassword = config.getProperty("cassandra_password"); String ssl_keystore_file_path =
-		  config.getProperty("ssl_keystore_file_path"); String ssl_keystore_password =
-		  config.getProperty("ssl_keystore_password");
+		/*
+		 * cassandraHost = config.getProperty("cassandra_host"); cassandraPort =
+		 * Integer.parseInt(config.getProperty("cassandra_port")); cassandraUsername =
+		 * config.getProperty("cassandra_username"); cassandraPassword =
+		 * config.getProperty("cassandra_password"); String ssl_keystore_file_path =
+		 * config.getProperty("ssl_keystore_file_path"); String ssl_keystore_password =
+		 * config.getProperty("ssl_keystore_password");
+		 */
 		 
         
-		/*
-		 * cassandraHost = System.getenv("cassandra_host"); cassandraPort =
-		 * 10350;//System.getenv("cassandra_port"); cassandraUsername =
-		 * System.getenv("cassandra_username"); cassandraPassword =
-		 * System.getenv("cassandra_password"); String ssl_keystore_file_path =
-		 * System.getenv("ssl_keystore_file_path"); String ssl_keystore_password =
-		 * System.getenv("ssl_keystore_password");
-		 */
+		
+		cassandraHost = System.getenv("cassandra_host");
+		cassandraPort = 10350;// System.getenv("cassandra_port"); cassandraUsername =
+		cassandraUsername = System.getenv("cassandra_username");
+		cassandraPassword = System.getenv("cassandra_password");
+		String ssl_keystore_file_path = System.getenv("ssl_keystore_file_path");
+		String ssl_keystore_password = System.getenv("ssl_keystore_password");
+		 
 
+		logger.info("cassandraHost = " + cassandraHost);
+		logger.info("cassandraPort = " + cassandraPort);
+		logger.info("cassandraPassword = " + cassandraPassword);
+		logger.info("cassandraUsername = " + cassandraUsername);
+		
+		
+		
         // If ssl_keystore_file_path, build the path using JAVA_HOME directory.
         if (ssl_keystore_file_path == null || ssl_keystore_file_path.isEmpty()) {
             String javaHomeDirectory = System.getenv("JAVA_HOME");
